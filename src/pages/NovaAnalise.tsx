@@ -31,18 +31,26 @@ interface UploadedFile {
 }
 
 const requiredDocuments = [
-  { type: 'planta', label: 'Planta Baixa', icon: Image },
-  { type: 'planilha', label: 'Planilha de Metragens', icon: Table },
+  { type: 'documento', label: 'Matrícula do Registro de Imóveis ou Documento de Posse', icon: FileText },
+  { type: 'documento', label: 'Projeto Arquitetônico Padrão (IN 002/SMHDU/GAB/2024)', icon: Image },
+  { type: 'documento', label: 'Documento de Identificação do Proprietário do Imóvel', icon: FileText },
+  { type: 'documento', label: 'Levantamento Topográfico (Exceto em Condomínio e Loteamento Aprovado)', icon: Table },
+  { type: 'documento', label: 'Documento de Responsabilidade Técnica do Levantamento Topográfico', icon: FileText },
+  { type: 'documento', label: 'Documento de Responsabilidade Técnica do Projeto', icon: FileText },
+  { type: 'documento', label: 'Número do Projeto Aprovado (Substituição) / Habite-se (Reforma)', icon: FileText },
+  { type: 'documento', label: 'Documento com a Descrição das Alterações (Substituição)', icon: FileText },
+  { type: 'documento', label: 'Memorial Justificativo – Impossibilidade do Sistema Declaratório (Unifamiliar)', icon: FileText },
+  { type: 'documento', label: 'Termo Declaratório de Uso de Incentivos', icon: FileText },
   { type: 'documento', label: 'Consulta de Viabilidade', icon: FileText },
   { type: 'documento', label: 'Consulta Ambiental', icon: FileText },
-  { type: 'documento', label: 'Certidão Cadastral', icon: FileText },
+  { type: 'documento', label: 'Certidão Cadastral do Geo', icon: FileText },
 ];
 
 export default function NovaAnalise() {
   const navigate = useNavigate();
   const [step, setStep] = useState<AnalysisStep>('upload');
   const [protocolo, setProtocolo] = useState('');
-  const [endereco, setEndereco] = useState('');
+  const [inscricaoImobiliaria, setInscricaoImobiliaria] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResults, setAnalysisResults] = useState<any>(null);
@@ -61,8 +69,8 @@ export default function NovaAnalise() {
   };
 
   const startAnalysis = async () => {
-    if (!protocolo || !endereco) {
-      toast.error('Preencha o protocolo e endereço');
+    if (!protocolo || !inscricaoImobiliaria) {
+      toast.error('Preencha o protocolo e inscrição imobiliária');
       return;
     }
 
@@ -173,13 +181,13 @@ export default function NovaAnalise() {
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Endereço</label>
+                <label className="text-sm font-medium text-foreground">Inscrição Imobiliária</label>
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
-                    placeholder="Rua, número - Bairro"
-                    value={endereco}
-                    onChange={(e) => setEndereco(e.target.value)}
+                    placeholder="00.00.000.0000.000"
+                    value={inscricaoImobiliaria}
+                    onChange={(e) => setInscricaoImobiliaria(e.target.value)}
                     className="pl-10"
                   />
                 </div>
@@ -373,7 +381,7 @@ export default function NovaAnalise() {
               setStep('upload');
               setUploadedFiles([]);
               setProtocolo('');
-              setEndereco('');
+              setInscricaoImobiliaria('');
               setAnalysisResults(null);
             }}>
               Nova Análise
