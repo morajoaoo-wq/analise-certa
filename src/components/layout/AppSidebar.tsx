@@ -64,10 +64,10 @@ export function AppSidebar() {
       <div className="h-16 flex items-center justify-between px-4 border-b border-sidebar-border">
         {!collapsed && (
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-              <Building2 className="w-4 h-4 text-primary-foreground" />
+            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+              <Building2 className="w-4 h-4 text-white" />
             </div>
-            <span className="font-display font-semibold text-foreground">UrbanPlan</span>
+            <span className="font-display font-semibold text-sidebar-foreground">UrbanPlan</span>
           </div>
         )}
         <Button
@@ -106,12 +106,12 @@ export function AppSidebar() {
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                 isActive 
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground" 
-                  : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground",
+                  ? "bg-white/20 text-white" 
+                  : "text-white/80 hover:bg-white/10 hover:text-white",
                 collapsed && "justify-center px-0"
               )}
             >
-              <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
+              <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-white")} />
               {!collapsed && <span>{item.label}</span>}
             </NavLink>
           );
@@ -123,7 +123,7 @@ export function AppSidebar() {
         <NavLink
           to="/configuracoes"
           className={cn(
-            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent/50 transition-colors",
+            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-colors",
             collapsed && "justify-center px-0"
           )}
         >
@@ -133,18 +133,18 @@ export function AppSidebar() {
 
         {/* User Info */}
         <div className={cn(
-          "flex items-center gap-3 px-3 py-3 rounded-lg bg-secondary/30",
+          "flex items-center gap-3 px-3 py-3 rounded-lg bg-white/10",
           collapsed && "justify-center px-2"
         )}>
-          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-            <span className="text-xs font-medium text-primary">
+          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+            <span className="text-xs font-medium text-white">
               {user?.name?.charAt(0).toUpperCase()}
             </span>
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-foreground truncate">{user?.name}</p>
-              <p className="text-xs text-muted-foreground">{getRoleLabel(user?.role || '')}</p>
+              <p className="text-sm font-medium text-white truncate">{user?.name}</p>
+              <p className="text-xs text-white/70">{getRoleLabel(user?.role || '')}</p>
             </div>
           )}
         </div>
@@ -152,7 +152,7 @@ export function AppSidebar() {
         <button
           onClick={logout}
           className={cn(
-            "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors",
+            "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-300 hover:bg-red-500/20 transition-colors",
             collapsed && "justify-center px-0"
           )}
         >
